@@ -5,3 +5,16 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
 @media(max-width:700px){.hero h1{font-size:clamp(32px,8vw,43px)}}
+
+@media(max-width:700px){
+  .hero h1 br,.section h2 br,.courses h3 br{display:none}
+  .agency-band{
+    display:grid;
+    grid-template-columns:minmax(0,.95fr) minmax(0,1.15fr) minmax(0,2.2fr);
+    gap:10px;
+    align-items:center;
+    justify-content:stretch;
+  }
+  .agency-band>div{display:contents}
+  .agency-band img,.agency-band img.nia{width:100%;min-width:0}
+}
