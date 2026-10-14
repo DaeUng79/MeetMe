@@ -40,6 +40,7 @@ h2{font-size:clamp(30px,3vw,46px)}
 .needs-list article>span{font-size:11px;color:#8a6d39;letter-spacing:.1em;margin-top:6px}
 .needs h3{font-size:20px;margin-bottom:10px}
 .needs p:not(.eyebrow){font-size:14px;color:var(--muted)}
+.needs-list a{display:inline-block;margin-top:12px;font-size:13px;font-weight:700;text-decoration:underline;text-underline-offset:4px}
 .projects{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
 .project-visual{height:240px;position:relative;overflow:hidden;padding:30px}
 .document{background:#e8e5db}
