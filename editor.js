@@ -2,7 +2,6 @@ const SIZE = { width: 860, height: 520, exportWidth: 2032, exportHeight: 1228, d
 const COLOR = { black: '#151719', gold: '#c7ac76', ivory: '#f7f5ef', gray: '#61666b' };
 const STORAGE_KEY = 'meetme-card-editor-v1';
 const DEFAULTS = {
-  frontImageFit: 'contain', backImageFit: 'contain',
   certLabel: 'AI챔피언', grade: 'BLACK', certCode: '2026-BC0663(임시데이터)',
   name: '오대웅', affiliation: '양산시', title: '지방전산주사',
   phone: '010-2886-5213', email: 'odw0902@korea.kr', tagline: 'BUILD · TEACH · SOLVE',
@@ -44,7 +43,7 @@ const BACK_FIELDS = [
 
 let data = loadSaved();
 const images = {};
-const customImages = {front:null, back:null, qr:null};
+const customImages = {qr:null};
 const canvases = new Map();
 const status = document.getElementById('status');
 
@@ -86,15 +85,13 @@ document.getElementById('tab-back').addEventListener('click', () => showTab('bac
 document.getElementById('tab-images').addEventListener('click', () => showTab('images'));
 document.getElementById('reset').addEventListener('click', () => {
   if (!confirm('편집한 내용을 지우고 기본 문구로 복원할까요?')) return;
-  data = {...DEFAULTS,frontImageFit:data.frontImageFit,backImageFit:data.backImageFit};
+  data = {...DEFAULTS};
   document.querySelectorAll('#card-form [name]').forEach(input => { input.value = data[input.name]; });
   save(); renderAll(); status.textContent='기본 문구로 복원했습니다.';
 });
 
 const UPLOADS = [
-  {key:'front',title:'앞면 완성 이미지',help:'등록하면 세 시안의 앞면을 이 이미지로 대체합니다.'},
-  {key:'back',title:'뒷면 완성 이미지',help:'등록하면 세 시안의 뒷면을 이 이미지로 대체합니다. QR 교체 이미지는 보이지 않습니다.'},
-  {key:'qr',title:'QR 이미지',help:'기본 디자인의 뒷면 QR만 교체합니다. 정사각형 QR 이미지가 좋습니다.'}
+  {key:'qr',title:'QR 이미지',help:'세 시안 뒷면의 QR을 교체합니다. 정사각형 QR 이미지가 좋습니다.'}
 ];
 const uploadUI = {};
 for (const {key,title,help} of UPLOADS) {
@@ -106,15 +103,6 @@ for (const {key,title,help} of UPLOADS) {
   const meta=document.createElement('div');meta.className='upload-meta';
   const actions=document.createElement('div');actions.className='upload-actions';
   const remove=document.createElement('button');remove.type='button';remove.textContent='이미지 제거';remove.disabled=true;
-  if(key!=='qr') {
-    const select=document.createElement('select');select.setAttribute('aria-label',`${title} 배치 방식`);
-    for(const [value,text] of [['contain','전체 보이기'],['cover','화면 채우기 · 가장자리 잘림']]) {
-      const option=document.createElement('option');option.value=value;option.textContent=text;select.append(option);
-    }
-    select.value=data[`${key}ImageFit`];
-    select.addEventListener('change',()=>{data[`${key}ImageFit`]=select.value;save();renderAll();});
-    actions.append(select);
-  }
   actions.append(remove);wrap.append(heading,note,input,meta,actions);
   document.getElementById('upload-list').append(wrap);
   uploadUI[key]={input,meta,remove};
@@ -170,7 +158,7 @@ async function registerUpload(key,file) {
   customImages[key]={image,url,name:file.name,width:image.naturalWidth,height:image.naturalHeight};
   if(previous)URL.revokeObjectURL(previous.url);
   refreshUploadUI(key);renderAll();
-  try {await dbWrite(key,{blob:file,name:file.name});status.textContent=`${key==='qr'?'QR':key==='front'?'앞면':'뒷면'} 이미지를 등록했습니다.`;}
+  try {await dbWrite(key,{blob:file,name:file.name});status.textContent='QR 이미지를 등록했습니다.';}
   catch {status.textContent='이미지는 현재 화면에 적용됐지만 브라우저에 저장하지 못했습니다.';}
 }
 async function removeUpload(key) {
@@ -316,10 +304,6 @@ function drawCard(canvas,concept,side){
   ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
   const base=side==='back'?(concept==='b'?'#fff':COLOR.ivory):(concept==='b'?COLOR.ivory:COLOR.black);
   rect(ctx,0,0,SIZE.width,SIZE.height,base);
-  if(customImages[side]) {
-    drawFittedImage(ctx,customImages[side].image,0,0,SIZE.width,SIZE.height,data[`${side}ImageFit`]);
-    return;
-  }
   ctx.save();ctx.translate(0,(520-500*(860/900))/2);ctx.scale(860/900,860/900);
   if(side==='front') front(ctx,concept); else back(ctx,concept);
   ctx.restore();
