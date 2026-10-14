@@ -2,6 +2,7 @@ const SIZE = { width: 860, height: 520, exportWidth: 2032, exportHeight: 1228, d
 const COLOR = { black: '#151719', gold: '#c7ac76', ivory: '#f7f5ef', gray: '#61666b' };
 const STORAGE_KEY = 'meetme-card-editor-v1';
 const DEFAULTS = {
+  frontImageFit: 'contain', backImageFit: 'contain',
   certLabel: 'AI챔피언', grade: 'BLACK', certCode: '2026-BC0663(임시데이터)',
   name: '오대웅', affiliation: '양산시', title: '지방전산주사',
   phone: '010-2886-5213', email: 'odw0902@korea.kr', tagline: 'BUILD · TEACH · SOLVE',
@@ -43,6 +44,7 @@ const BACK_FIELDS = [
 
 let data = loadSaved();
 const images = {};
+const customImages = {front:null, back:null, qr:null};
 const canvases = new Map();
 const status = document.getElementById('status');
 
@@ -73,20 +75,111 @@ setupFields('front-fields', FRONT_FIELDS);
 setupFields('back-fields', BACK_FIELDS);
 
 function showTab(side) {
-  for (const tabSide of ['front','back']) {
+  for (const tabSide of ['front','back','images']) {
     const selected = tabSide === side;
     document.getElementById(`tab-${tabSide}`).setAttribute('aria-selected', String(selected));
-    document.getElementById(`${tabSide}-fields`).hidden = !selected;
+    document.getElementById(`${tabSide==='images'?'image':tabSide}-fields`).hidden = !selected;
   }
 }
 document.getElementById('tab-front').addEventListener('click', () => showTab('front'));
 document.getElementById('tab-back').addEventListener('click', () => showTab('back'));
+document.getElementById('tab-images').addEventListener('click', () => showTab('images'));
 document.getElementById('reset').addEventListener('click', () => {
   if (!confirm('편집한 내용을 지우고 기본 문구로 복원할까요?')) return;
-  data = {...DEFAULTS};
+  data = {...DEFAULTS,frontImageFit:data.frontImageFit,backImageFit:data.backImageFit};
   document.querySelectorAll('#card-form [name]').forEach(input => { input.value = data[input.name]; });
   save(); renderAll(); status.textContent='기본 문구로 복원했습니다.';
 });
+
+const UPLOADS = [
+  {key:'front',title:'앞면 완성 이미지',help:'등록하면 세 시안의 앞면을 이 이미지로 대체합니다.'},
+  {key:'back',title:'뒷면 완성 이미지',help:'등록하면 세 시안의 뒷면을 이 이미지로 대체합니다. QR 교체 이미지는 보이지 않습니다.'},
+  {key:'qr',title:'QR 이미지',help:'기본 디자인의 뒷면 QR만 교체합니다. 정사각형 QR 이미지가 좋습니다.'}
+];
+const uploadUI = {};
+for (const {key,title,help} of UPLOADS) {
+  const wrap=document.createElement('section');wrap.className='upload-field';
+  const heading=document.createElement('h3');heading.textContent=title;
+  const note=document.createElement('p');note.textContent=help;
+  const input=document.createElement('input');input.type='file';input.accept='image/png,image/jpeg,image/webp';
+  input.id=`upload-${key}`;input.setAttribute('aria-label',`${title} 등록`);
+  const meta=document.createElement('div');meta.className='upload-meta';
+  const actions=document.createElement('div');actions.className='upload-actions';
+  const remove=document.createElement('button');remove.type='button';remove.textContent='이미지 제거';remove.disabled=true;
+  if(key!=='qr') {
+    const select=document.createElement('select');select.setAttribute('aria-label',`${title} 배치 방식`);
+    for(const [value,text] of [['contain','전체 보이기'],['cover','화면 채우기 · 가장자리 잘림']]) {
+      const option=document.createElement('option');option.value=value;option.textContent=text;select.append(option);
+    }
+    select.value=data[`${key}ImageFit`];
+    select.addEventListener('change',()=>{data[`${key}ImageFit`]=select.value;save();renderAll();});
+    actions.append(select);
+  }
+  actions.append(remove);wrap.append(heading,note,input,meta,actions);
+  document.getElementById('upload-list').append(wrap);
+  uploadUI[key]={input,meta,remove};
+  input.addEventListener('change',async()=>{const file=input.files?.[0];if(file) await registerUpload(key,file);input.value='';});
+  remove.addEventListener('click',()=>removeUpload(key));
+  refreshUploadUI(key);
+}
+
+function refreshUploadUI(key) {
+  const record=customImages[key],ui=uploadUI[key];
+  ui.meta.textContent=record?`${record.name} · ${record.width} × ${record.height}px 등록됨`:'등록된 이미지 없음 · 기본 디자인 사용';
+  ui.remove.disabled=!record;
+}
+function openUploadDB() {
+  return new Promise((resolve,reject)=>{
+    const request=indexedDB.open('meetme-card-uploads',1);
+    request.onupgradeneeded=()=>request.result.createObjectStore('images');
+    request.onsuccess=()=>resolve(request.result);
+    request.onerror=()=>reject(request.error);
+  });
+}
+const dbPromise=openUploadDB().catch(()=>null);
+async function dbWrite(key,value) {
+  const db=await dbPromise;if(!db) throw new Error('브라우저 이미지 저장소를 사용할 수 없습니다.');
+  return new Promise((resolve,reject)=>{
+    const tx=db.transaction('images','readwrite');
+    if(value) tx.objectStore('images').put(value,key);else tx.objectStore('images').delete(key);
+    tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);
+  });
+}
+async function restoreUploads() {
+  const db=await dbPromise;
+  if(!db) {status.textContent='이 브라우저에서는 이미지 등록 내용이 다시 열 때 유지되지 않을 수 있습니다.';return;}
+  for(const {key} of UPLOADS) {
+    const record=await new Promise(resolve=>{
+      const request=db.transaction('images').objectStore('images').get(key);
+      request.onsuccess=()=>resolve(request.result);request.onerror=()=>resolve(null);
+    });
+    if(!record?.blob) continue;
+    const url=URL.createObjectURL(record.blob),image=await loadImage(url);
+    if(!image){URL.revokeObjectURL(url);continue;}
+    customImages[key]={image,url,name:record.name,width:image.naturalWidth,height:image.naturalHeight};
+    refreshUploadUI(key);
+  }
+  renderAll();
+}
+async function registerUpload(key,file) {
+  if(!['image/png','image/jpeg','image/webp'].includes(file.type)) {status.textContent='PNG·JPG·WebP 이미지만 등록할 수 있습니다.';return;}
+  if(file.size>20*1024*1024){status.textContent='이미지는 20MB 이하로 선택해 주세요.';return;}
+  const url=URL.createObjectURL(file),image=await loadImage(url);
+  if(!image){URL.revokeObjectURL(url);status.textContent='이미지를 읽지 못했습니다. 다른 파일을 선택해 주세요.';return;}
+  const previous=customImages[key];
+  customImages[key]={image,url,name:file.name,width:image.naturalWidth,height:image.naturalHeight};
+  if(previous)URL.revokeObjectURL(previous.url);
+  refreshUploadUI(key);renderAll();
+  try {await dbWrite(key,{blob:file,name:file.name});status.textContent=`${key==='qr'?'QR':key==='front'?'앞면':'뒷면'} 이미지를 등록했습니다.`;}
+  catch {status.textContent='이미지는 현재 화면에 적용됐지만 브라우저에 저장하지 못했습니다.';}
+}
+async function removeUpload(key) {
+  const previous=customImages[key];if(!previous)return;
+  customImages[key]=null;URL.revokeObjectURL(previous.url);
+  refreshUploadUI(key);renderAll();
+  try{await dbWrite(key,null);status.textContent='이미지를 제거하고 기본 디자인으로 복원했습니다.';}
+  catch{status.textContent='현재 화면에서는 복원됐지만 저장소에서 제거하지 못했습니다.';}
+}
 
 const CONCEPTS = [
   {key:'a',name:'01 · BLACK & GOLD',desc:'검정 바탕 · 골드 인증'},
@@ -130,7 +223,8 @@ Promise.all([
   Object.assign(images,{yangsan,mois,nia,qr});
   status.textContent = qr && yangsan && mois && nia ? '' : '일부 이미지가 로드되지 않았습니다. 서버에서 페이지를 다시 열어주세요.';
   renderAll();
-});
+  return restoreUploads();
+}).catch(()=>{status.textContent='폰트 또는 이미지를 불러오지 못했습니다. 페이지를 다시 열어주세요.';});
 
 function rect(ctx,x,y,w,h,color) {ctx.fillStyle=color;ctx.fillRect(x,y,w,h);}
 function rounded(ctx,x,y,w,h,r,color) {ctx.fillStyle=color;ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fill();}
@@ -146,6 +240,16 @@ function fittedText(ctx,value,x,baseline,maxWidth,size,color,bold=false,minSize=
 function imageOrText(ctx,img,x,y,w,h,label) {
   if(img) ctx.drawImage(img,x,y,w,h);
   else fittedText(ctx,label,x,y+h*.75,w,22,COLOR.black,true);
+}
+function drawFittedImage(ctx,img,x,y,w,h,fit='contain') {
+  const iw=img.naturalWidth,ih=img.naturalHeight;
+  if(fit==='cover') {
+    const ratio=Math.max(w/iw,h/ih),sw=w/ratio,sh=h/ratio;
+    ctx.drawImage(img,(iw-sw)/2,(ih-sh)/2,sw,sh,x,y,w,h);
+  } else {
+    const ratio=Math.min(w/iw,h/ih),dw=iw*ratio,dh=ih*ratio;
+    ctx.drawImage(img,x+(w-dw)/2,y+(h-dh)/2,dw,dh);
+  }
 }
 function agencies(ctx) {
   rounded(ctx,34,412,832,78,13,'#fff');
@@ -199,7 +303,9 @@ function back(ctx,concept) {
   const ys=[240,273,306,339,372,405];
   for(const [i,item] of itemLines(data.leftItems).entries()) fittedText(ctx,'· '+item,38,ys[i],390,18,COLOR.gray,false,13);
   for(const [i,item] of itemLines(data.rightItems).entries()) fittedText(ctx,'· '+item,454,ys[i],410,18,COLOR.gray,false,13);
-  rect(ctx,680,10,190,190,'#fff');imageOrText(ctx,images.qr,680,10,190,190,'QR');
+  rect(ctx,680,10,190,190,'#fff');
+  if(customImages.qr)drawFittedImage(ctx,customImages.qr.image,686,16,178,178);
+  else imageOrText(ctx,images.qr,680,10,190,190,'QR');
   rounded(ctx,34,428,832,60,12,COLOR.black);
   fittedText(ctx,data.callToAction,55,466,535,21,COLOR.ivory,true,13);
   fittedText(ctx,data.siteText,847,465,235,15,'#d9c9a6',false,11,'right');
@@ -207,8 +313,13 @@ function back(ctx,concept) {
 function drawCard(canvas,concept,side){
   const ctx=canvas.getContext('2d');
   ctx.setTransform(canvas.width/SIZE.width,0,0,canvas.height/SIZE.height,0,0);
+  ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
   const base=side==='back'?(concept==='b'?'#fff':COLOR.ivory):(concept==='b'?COLOR.ivory:COLOR.black);
   rect(ctx,0,0,SIZE.width,SIZE.height,base);
+  if(customImages[side]) {
+    drawFittedImage(ctx,customImages[side].image,0,0,SIZE.width,SIZE.height,data[`${side}ImageFit`]);
+    return;
+  }
   ctx.save();ctx.translate(0,(520-500*(860/900))/2);ctx.scale(860/900,860/900);
   if(side==='front') front(ctx,concept); else back(ctx,concept);
   ctx.restore();
