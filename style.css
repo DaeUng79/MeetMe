@@ -29,11 +29,6 @@ h1 em{font-style:normal;color:#8a6d39}
 .text-link{font-size:13px;border-bottom:1px solid currentColor;padding-bottom:5px}
 .identity{position:relative;overflow:hidden;padding:0;min-height:0}
 .identity-photo{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:contain}
-.agency-band{padding:26px 6%;display:flex;justify-content:center;gap:65px;background:#fff;border-block:1px solid var(--line)}
-.agency-band>div{display:flex;align-items:center;gap:25px}
-.agency-band span{font-size:11px;color:var(--muted)}
-.agency-band img{width:110px;height:auto;object-fit:contain}
-.agency-band img.nia{width:250px}
 .section{padding:92px 6%;max-width:1600px;margin:auto}
 .section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:45px}
 h2{font-size:clamp(30px,3vw,46px)}
@@ -94,23 +89,14 @@ h2{font-size:clamp(30px,3vw,46px)}
 .contact-links{display:flex;gap:45px;margin:30px 0;font-size:23px}
 .contact .button{font-size:12px}
 footer{display:flex;gap:25px;align-items:center;justify-content:space-between;padding:28px 6%;font-size:10px;color:var(--muted);max-width:1600px;margin:auto}
-@media(min-width:1500px){.hero{gap:13%}}@media(max-width:1000px){.header nav{gap:18px}.wordmark span{display:none}.hero{gap:5%;padding-block:55px}.identity{padding:25px;min-height:445px}.agency-band{gap:30px;flex-wrap:wrap}.agency-band>div{gap:18px}.agency-band img.nia{width:215px}.needs{gap:5%}.projects{gap:20px}.project-visual{padding:20px;height:215px}.paper{width:94%}.section{padding-block:65px}.courses{gap:25px}.courses h3{font-size:24px}.section-caption{max-width:280px}}
-@media(max-width:700px){html{scroll-padding-top:25px}.header{height:75px}.wordmark{font-size:21px}.header nav{gap:15px;font-size:12px}.header nav a:first-child{display:none}.hero{display:block;padding-top:45px}.eyebrow{font-size:10px;margin-bottom:20px}h1{font-size:43px}.intro{font-size:17px;margin-top:26px}.hero-note{font-size:12px}.actions{gap:20px}.button{font-size:13px;padding:14px 18px}.identity{margin-top:42px;min-height:0;padding:28px}.monogram{margin:25px 0 20px;font-size:82px}.identity h2{font-size:29px}.identity-top{font-size:9px}.agency-band{padding:24px 6%;justify-content:start;gap:21px}.agency-band>div{gap:15px;flex-wrap:wrap}.agency-band span{font-size:10px;min-width:100%;margin-bottom:-8px}.agency-band img{width:100px}.agency-band img.nia{width:200px}.section{padding:58px 6%}.section-head{display:block;margin-bottom:30px}.section-caption{margin-top:20px;max-width:none;font-size:12px}h2{font-size:32px}.needs{display:block}.needs .section-head{margin-bottom:30px}.needs h3{font-size:19px}.needs p:not(.eyebrow){font-size:13px}.needs-list article{gap:15px;padding:22px 0}.projects{display:block}.project{margin-bottom:35px}.project:last-child{margin-bottom:0}.project-visual{height:245px;padding:30px}.paper{width:65%;max-width:240px}.search-lines b{font-size:29px}.blocks b{font-size:45px}.project-info{padding-top:20px}.project-info>p:not(.tag){font-size:13px}.work-footnote{font-size:11px}.courses{display:block}.courses article{margin-top:32px}.courses h3{font-size:27px}.teaching-proof{display:block;margin-top:32px}.teaching-proof p{margin:14px 0}.teaching-proof a{display:inline-block}.timeline article{grid-template-columns:1fr;gap:8px;padding:24px 0}.timeline h3{font-size:19px}.timeline p{font-size:12px}.timeline-tag{font-size:10px}.timeline time{font-size:11px}.source-link{font-size:12px;margin-left:0}.contact-links{display:flex;flex-direction:column;gap:15px;font-size:22px}.contact h2{font-size:38px}footer{align-items:start;flex-direction:column;gap:7px;font-size:10px}}
+@media(min-width:1500px){.hero{gap:13%}}@media(max-width:1000px){.header nav{gap:18px}.wordmark span{display:none}.hero{gap:5%;padding-block:55px}.identity{padding:25px;min-height:445px}.needs{gap:5%}.projects{gap:20px}.project-visual{padding:20px;height:215px}.paper{width:94%}.section{padding-block:65px}.courses{gap:25px}.courses h3{font-size:24px}.section-caption{max-width:280px}}
+@media(max-width:700px){html{scroll-padding-top:25px}.header{height:75px}.wordmark{font-size:21px}.header nav{gap:15px;font-size:12px}.header nav a:first-child{display:none}.hero{display:block;padding-top:45px}.eyebrow{font-size:10px;margin-bottom:20px}h1{font-size:43px}.intro{font-size:17px;margin-top:26px}.hero-note{font-size:12px}.actions{gap:20px}.button{font-size:13px;padding:14px 18px}.identity{margin-top:42px;min-height:0;padding:28px}.monogram{margin:25px 0 20px;font-size:82px}.identity h2{font-size:29px}.identity-top{font-size:9px}.section{padding:58px 6%}.section-head{display:block;margin-bottom:30px}.section-caption{margin-top:20px;max-width:none;font-size:12px}h2{font-size:32px}.needs{display:block}.needs .section-head{margin-bottom:30px}.needs h3{font-size:19px}.needs p:not(.eyebrow){font-size:13px}.needs-list article{gap:15px;padding:22px 0}.projects{display:block}.project{margin-bottom:35px}.project:last-child{margin-bottom:0}.project-visual{height:245px;padding:30px}.paper{width:65%;max-width:240px}.search-lines b{font-size:29px}.blocks b{font-size:45px}.project-info{padding-top:20px}.project-info>p:not(.tag){font-size:13px}.work-footnote{font-size:11px}.courses{display:block}.courses article{margin-top:32px}.courses h3{font-size:27px}.teaching-proof{display:block;margin-top:32px}.teaching-proof p{margin:14px 0}.teaching-proof a{display:inline-block}.timeline article{grid-template-columns:1fr;gap:8px;padding:24px 0}.timeline h3{font-size:19px}.timeline p{font-size:12px}.timeline-tag{font-size:10px}.timeline time{font-size:11px}.source-link{font-size:12px;margin-left:0}.contact-links{display:flex;flex-direction:column;gap:15px;font-size:22px}.contact h2{font-size:38px}footer{align-items:start;flex-direction:column;gap:7px;font-size:10px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
 @media(max-width:700px){.hero h1{font-size:clamp(32px,8vw,43px)}}
 
 @media(max-width:700px){
   .hero h1 br,.section h2 br,.courses h3 br{display:none}
-  .agency-band{
-    display:grid;
-    grid-template-columns:minmax(0,.95fr) minmax(0,1.15fr) minmax(0,2.2fr);
-    gap:10px;
-    align-items:center;
-    justify-content:stretch;
-  }
-  .agency-band>div{display:contents}
-  .agency-band img,.agency-band img.nia{width:100%;min-width:0}
 }
 
 .identity{padding:0;min-height:0}
