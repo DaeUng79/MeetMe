@@ -1157,6 +1157,7 @@
       .brand-text span { font-size: 11px; }
       .top-meta .chip { display: none; }
       .actions .icon-btn { width: 40px; height: 40px; border-radius: 13px; }
+      .actions #topBtn { display: none; }
       .sidebar { display: none; }
       .mobile-contact { display: flex; }
       .mobile-nav { display: flex; }
@@ -1333,6 +1334,25 @@
       border-color: var(--line);
       color: var(--text);
     }
+    .home-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel);
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .home-link:hover { background: var(--bg2); }
+    .home-link:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
     .btn:hover,
     .icon-btn:hover { background: var(--bg2); }
     .btn.primary {
@@ -1470,6 +1490,7 @@
         </a>
 
         <div class="actions">
+          <a class="home-link" href="index.html" aria-label="메인 화면으로 돌아가기">메인으로</a>
           <button class="icon-btn" id="printBtn" type="button" title="인쇄">⎙</button>
           <button class="icon-btn" id="topBtn" type="button" title="맨 위로">↑</button>
         </div>
