@@ -109,4 +109,3 @@ footer{display:flex;gap:25px;align-items:center;justify-content:space-between;pa
   .wordmark img{width:2em;height:1.7em}
   .header nav{gap:clamp(7px,2.3vw,12px);font-size:11px}
 }
-.lecture-link{display:inline-block;margin-top:24px}
