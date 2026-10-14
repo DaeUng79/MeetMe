@@ -1,0 +1,2032 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f7f5ef" />
+  <meta name="color-scheme" content="light" />
+  <title>외부강의등 신고 가이드 | 지방 공직자용</title>
+  <style>
+    :root {
+      --bg: #f7f5ef;
+      --bg2: #efeee8;
+      --panel: #fff;
+      --panel-strong: #fff;
+      --card: #fff;
+      --card-2: #f2f0e9;
+      --line: #d8d8cf;
+      --line-2: rgba(199, 172, 118, 0.48);
+      --text: #151719;
+      --muted: #666b6d;
+      --muted-2: #858179;
+      --accent: #c7ac76;
+      --accent-2: #8a6d39;
+      --accent-3: #8a6d39;
+      --danger: #a6453f;
+      --ok: #56795b;
+      --shadow: 0 20px 50px rgba(21, 23, 25, 0.08);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 18px;
+      --radius-sm: 14px;
+      --header-h: 76px;
+      --nav-w: 290px;
+      --content-max: 1180px;
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+      background: var(--bg);
+      overflow-x: hidden;
+    }
+    body::before,
+    body::after {
+      display: none;
+      content: "";
+      position: fixed;
+      inset: auto;
+      pointer-events: none;
+      z-index: 0;
+    }
+    body::before {
+      top: -120px;
+      left: -160px;
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, rgba(116, 168, 255, 0.18), transparent 68%);
+      filter: blur(8px);
+      opacity: 0.85;
+    }
+    body::after {
+      right: -100px;
+      bottom: -140px;
+      width: 360px;
+      height: 360px;
+      background: radial-gradient(circle, rgba(85, 227, 198, 0.14), transparent 66%);
+      filter: blur(12px);
+      opacity: 0.8;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+
+    .shell {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: var(--header-h);
+      padding: 16px clamp(16px, 2vw, 28px);
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(8, 17, 31, 0.96), rgba(8, 17, 31, 0.78));
+      backdrop-filter: blur(16px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(116, 168, 255, 0.98), rgba(85, 227, 198, 0.9));
+      color: #03101a;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      box-shadow: 0 12px 24px rgba(116, 168, 255, 0.22);
+      flex: 0 0 auto;
+    }
+    .brand-text { min-width: 0; }
+    .brand-text strong {
+      display: block;
+      font-size: 16px;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+    }
+    .brand-text span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .top-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .chip strong { color: var(--text); font-weight: 700; }
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      display: inline-grid;
+      place-items: center;
+      box-shadow: none;
+    }
+    .icon-btn:hover { background: rgba(255, 255, 255, 0.08); }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: minmax(240px, var(--nav-w)) minmax(0, 1fr);
+      gap: 22px;
+      width: min(var(--content-max), calc(100vw - 32px));
+      margin: 20px auto 100px;
+      align-items: start;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: calc(var(--header-h) + 18px);
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: linear-gradient(180deg, rgba(10, 22, 42, 0.92), rgba(8, 16, 30, 0.9));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+    .sidebar h2 {
+      margin: 0 0 10px;
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .sidebar nav {
+      display: grid;
+      gap: 8px;
+    }
+    .nav-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid transparent;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.35;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+    .nav-link:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: var(--line);
+      color: var(--text);
+      transform: translateX(2px);
+    }
+    .nav-link.active {
+      background: linear-gradient(135deg, rgba(116, 168, 255, 0.16), rgba(85, 227, 198, 0.10));
+      border-color: var(--line-2);
+      color: var(--text);
+      box-shadow: 0 0 0 1px rgba(116, 168, 255, 0.04) inset;
+    }
+    .nav-link small {
+      color: var(--muted-2);
+      font-size: 11px;
+      flex: 0 0 auto;
+    }
+
+    .sidebar-card {
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .sidebar-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+    .sidebar-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    .sidebar-card .stack {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .sidebar-contact {
+      margin-top: 10px;
+      padding: 13px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(85, 227, 198, 0.18);
+      background: rgba(85, 227, 198, 0.06);
+      text-align: center;
+    }
+    .sidebar-contact span {
+      display: block;
+      color: var(--accent-2);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+    }
+    .sidebar-contact a {
+      display: block;
+      margin-top: 6px;
+      color: #d8fff7;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    .main {
+      min-width: 0;
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero,
+    .section-card,
+    .footer-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: linear-gradient(180deg, rgba(13, 25, 46, 0.92), rgba(8, 16, 30, 0.96));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .hero {
+      padding: clamp(22px, 3vw, 34px);
+      overflow: hidden;
+      position: relative;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: auto -120px -120px auto;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(116, 168, 255, 0.18), transparent 68%);
+      pointer-events: none;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent-2);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent-2);
+      box-shadow: 0 0 16px rgba(85, 227, 198, 0.55);
+    }
+
+    .hero-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      gap: 18px;
+      margin-top: 16px;
+      align-items: center;
+    }
+    .hero h1 {
+      margin: 14px 0 14px;
+      font-size: clamp(34px, 5vw, 60px);
+      line-height: 1.03;
+      letter-spacing: -0.06em;
+    }
+    .hero h1 mark,
+    .section-title mark,
+    .display mark {
+      color: var(--accent-2);
+      background: none;
+    }
+    .hero p.lead {
+      margin: 0;
+      max-width: 62ch;
+      font-size: clamp(15px, 1.35vw, 18px);
+      line-height: 1.75;
+      color: #cfdaee;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 0 16px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .btn.primary {
+      border-color: transparent;
+      background: linear-gradient(135deg, rgba(116, 168, 255, 0.95), rgba(85, 227, 198, 0.92));
+      color: #04131d;
+    }
+
+    .status-panel {
+      padding: 18px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+      border: 1px solid var(--line);
+      width: 100%;
+    }
+    .status-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+    .status-top strong {
+      display: block;
+      font-size: 14px;
+    }
+    .status-top span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .mini {
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      background: rgba(3, 10, 18, 0.25);
+      min-height: 122px;
+    }
+    .mini strong {
+      display: block;
+      font-size: 1em;
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      margin-bottom: 10px;
+    }
+    .status-panel .mini strong {
+      font-size: clamp(32px, 4vw, 45px);
+      line-height: 0.92;
+      margin-bottom: 10px;
+    }
+    .counter {
+      display: inline-block;
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      line-height: 1;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
+      font-size: var(--counter-size, clamp(34px, 4.4vw, 58px));
+      color: var(--text);
+      will-change: transform, opacity, filter;
+    }
+    .counter--hero,
+    .counter--metric,
+    .counter--card {
+      color: var(--text);
+    }
+    .counter--hero {
+      --counter-size: clamp(32px, 4.2vw, 46px);
+    }
+    .counter--metric {
+      --counter-size: clamp(30px, 4vw, 52px);
+    }
+    .counter--card {
+      --counter-size: clamp(28px, 3.6vw, 46px);
+      margin-right: 3px;
+    }
+    .memory .counter--metric {
+      --counter-size: clamp(34px, 4.5vw, 56px);
+    }
+    .status-panel .counter--hero {
+      --counter-size: clamp(34px, 4.5vw, 48px);
+      display: block;
+      line-height: 0.92;
+      transform: translateY(0.02em);
+    }
+    .status-panel .mini .counter--hero {
+      font-size: var(--counter-size) !important;
+      line-height: 0.92;
+      display: block;
+      width: 100%;
+    }
+    .status-panel .mini:nth-child(2) strong {
+      font-size: clamp(28px, 3.6vw, 40px);
+    }
+    .status-panel .mini:nth-child(2) .counter--hero {
+      --counter-size: clamp(28px, 3.8vw, 42px);
+    }
+    .counter.is-animating {
+      animation: counter-settle 720ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes counter-settle {
+      0% {
+        opacity: 0;
+        transform: translateY(0.32em) scale(0.96);
+        filter: blur(2px);
+      }
+      58% {
+        opacity: 1;
+        transform: translateY(-0.06em) scale(1.02);
+        filter: blur(0);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
+    }
+    .mini span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .section-card {
+      padding: clamp(18px, 2.4vw, 28px);
+    }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-end;
+      margin-bottom: 18px;
+    }
+    .section-title {
+      margin: 0;
+      font-size: clamp(24px, 3vw, 36px);
+      line-height: 1.1;
+      letter-spacing: -0.05em;
+    }
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+      max-width: 36ch;
+    }
+
+    .grid {
+      display: grid;
+      gap: 14px;
+    }
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .card {
+      padding: 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .card strong {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .tag {
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(116, 168, 255, 0.12);
+      color: #cfe0ff;
+      border: 1px solid rgba(116, 168, 255, 0.18);
+      font-size: 12px;
+    }
+    .tag.ok { background: rgba(85, 227, 198, 0.12); border-color: rgba(85, 227, 198, 0.18); color: #ccfff5; }
+    .tag.warn { background: rgba(255, 205, 112, 0.12); border-color: rgba(255, 205, 112, 0.18); color: #ffe4ab; }
+
+    .checklist {
+      display: grid;
+      gap: 10px;
+    }
+    .check {
+      display: flex;
+      gap: 12px;
+      padding: 14px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(0, 0, 0, 0.14);
+    }
+    .bullet {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--ok);
+      margin-top: 6px;
+      flex: 0 0 auto;
+      box-shadow: 0 0 12px rgba(136, 225, 166, 0.26);
+    }
+    .check.warn .bullet { background: var(--accent-3); box-shadow: 0 0 12px rgba(255, 205, 112, 0.24); }
+    .check.danger .bullet { background: var(--danger); box-shadow: 0 0 12px rgba(255, 141, 141, 0.24); }
+    .check strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+    .check span {
+      color: #c4cee1;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .exclusion-guide {
+      margin-top: 14px;
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(116, 168, 255, 0.18);
+      background: rgba(116, 168, 255, 0.06);
+    }
+    .exclusion-guide > strong {
+      display: block;
+      margin-bottom: 14px;
+      font-size: 16px;
+    }
+    .exclusion-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .exclusion-item {
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(3, 10, 18, 0.18);
+    }
+    .exclusion-item strong {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 14px;
+    }
+    .exclusion-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+    .exclusion-note {
+      margin: 10px 0 0;
+      padding: 13px 14px;
+      border-left: 3px solid var(--accent-3);
+      border-radius: 0 14px 14px 0;
+      background: rgba(255, 205, 112, 0.08);
+      color: #ffe4ab;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.7;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .steps--row {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .step {
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+      min-height: 168px;
+    }
+    .step .no {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: rgba(116, 168, 255, 0.14);
+      border: 1px solid rgba(116, 168, 255, 0.20);
+      color: #dce8ff;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .step strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+    .step .stacked-note {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.10);
+      color: #cdd7eb;
+      font-size: 12px;
+      line-height: 1.65;
+    }
+    .method-block {
+      margin-top: 16px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .method-block.method-block--wide {
+      margin-top: 18px;
+      padding: 18px 20px;
+    }
+    .method-block strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+    .method-block p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+    .rate-table-wrap {
+      margin-top: 10px;
+    }
+    .rate-table-title { text-align: center; }
+    .rate-table {
+      min-width: 0;
+      display: grid;
+      gap: 8px;
+    }
+    .rate-row {
+      display: grid;
+      grid-template-columns: minmax(56px, 0.65fr) minmax(80px, 0.9fr) minmax(84px, 0.95fr) minmax(0, 2fr);
+      gap: 8px;
+    }
+    .rate-row > div {
+      padding: 12px 9px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+      font-size: 13px;
+      line-height: 1.5;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+    .rate-row.rate-head > div {
+      background: rgba(116, 168, 255, 0.12);
+      border-color: rgba(116, 168, 255, 0.18);
+      color: #dfeaff;
+      font-weight: 800;
+      font-size: 14.4px;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      text-align: center;
+    }
+    .rate-row .tier {
+      font-weight: 800;
+      color: #f4f8ff;
+      text-align: center;
+    }
+    .rate-row .amount {
+      color: #dce8ff;
+      font-weight: 800;
+      white-space: nowrap;
+      text-align: center;
+    }
+    .rate-note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.65;
+    }
+    .split-callout {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .split-callout .callout {
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .split-callout .callout strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+    .split-callout .callout span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    .example-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .example-grid .example {
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .example-grid .example strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+    .example-grid .example span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .metric {
+      padding: 18px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .metric .value {
+      display: block;
+      font-size: var(--metric-size, clamp(30px, 4vw, 54px));
+      line-height: 1;
+      letter-spacing: -0.06em;
+      font-weight: 900;
+    }
+    .metric .value .unit {
+      font-size: 0.42em;
+      color: var(--accent-2);
+      margin-left: 4px;
+      font-weight: 800;
+    }
+    .metric p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .metric .lead-note {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      color: #c7d1e5;
+    }
+
+    .law {
+      display: grid;
+      gap: 12px;
+    }
+    .law-item {
+      padding: 15px 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    .law-item strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 15px;
+    }
+    .law-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .faq-toolbar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    .search {
+      flex: 1 1 320px;
+      min-width: 0;
+      border: 1px solid var(--line);
+      background: rgba(0, 0, 0, 0.20);
+      color: var(--text);
+      border-radius: 16px;
+      padding: 14px 16px;
+      outline: none;
+    }
+    .search:focus {
+      border-color: rgba(116, 168, 255, 0.42);
+      box-shadow: 0 0 0 4px rgba(116, 168, 255, 0.09);
+    }
+    .faq-count {
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .faq-list {
+      display: grid;
+      gap: 10px;
+    }
+    details.faq {
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+      overflow: hidden;
+    }
+    details.faq[open] {
+      background: rgba(255, 255, 255, 0.055);
+    }
+    details.faq summary {
+      list-style: none;
+      padding: 16px 18px;
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+      cursor: pointer;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+    details.faq summary::-webkit-details-marker { display: none; }
+    details.faq summary .arrow {
+      color: var(--muted);
+      transition: transform 0.2s ease;
+      flex: 0 0 auto;
+    }
+    details.faq[open] summary .arrow { transform: rotate(180deg); }
+    details.faq .answer {
+      padding: 0 18px 18px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    .footer-card {
+      padding: 20px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(240px, 0.95fr);
+      gap: 16px;
+      align-items: stretch;
+    }
+    .display {
+      font-size: clamp(24px, 3vw, 36px);
+      line-height: 1.18;
+      letter-spacing: -0.05em;
+      margin: 0;
+    }
+    .footer-note {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+    .contact-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .mobile-contact { display: none; }
+    .contact-card .eyebrow {
+      margin-bottom: 10px;
+    }
+    .contact-card h2 {
+      margin: 0;
+      font-size: clamp(20px, 2.4vw, 28px);
+      line-height: 1.25;
+      letter-spacing: -0.04em;
+    }
+    .contact-card p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    .contact-link {
+      flex: 0 1 340px;
+      min-width: 0;
+      padding: 15px 18px;
+      border: 1px solid rgba(85, 227, 198, 0.26);
+      border-radius: 16px;
+      background: rgba(85, 227, 198, 0.08);
+      color: #d8fff7;
+      font-weight: 800;
+      font-size: clamp(14px, 1.8vw, 16px);
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+      text-align: center;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+    .contact-link:hover,
+    .contact-link:focus-visible {
+      background: rgba(85, 227, 198, 0.16);
+      border-color: rgba(85, 227, 198, 0.5);
+      outline: none;
+      transform: translateY(-2px);
+    }
+    .memory {
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(116, 168, 255, 0.18);
+      background: linear-gradient(180deg, rgba(116, 168, 255, 0.12), rgba(85, 227, 198, 0.06));
+    }
+    .memory strong {
+      display: block;
+      color: #edf4ff;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    .memory .big {
+      font-size: var(--memory-size, clamp(30px, 4.4vw, 56px));
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.06em;
+    }
+    .memory .big span {
+      color: var(--accent-2);
+      font-size: 0.4em;
+      margin-left: 4px;
+    }
+    .memory p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .progress {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 3px;
+      z-index: 40;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 14px rgba(85, 227, 198, 0.35);
+    }
+    .float-top {
+      position: fixed;
+      right: 18px;
+      bottom: calc(90px + var(--safe-bottom));
+      z-index: 35;
+      display: none;
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(8, 17, 31, 0.9);
+      color: var(--text);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+    }
+    .float-top.show { display: grid; place-items: center; }
+
+    .mobile-nav {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 32;
+      display: none;
+      gap: 8px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 10px 10px calc(10px + var(--safe-bottom));
+      border-top: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(8, 17, 31, 0.70), rgba(8, 17, 31, 0.96));
+      backdrop-filter: blur(16px);
+    }
+    .mobile-nav::-webkit-scrollbar { display: none; }
+    .mobile-nav button {
+      flex: 1 1 0;
+      min-width: 0;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 10px 8px;
+      font-size: 11px;
+      line-height: 1.2;
+      text-align: center;
+    }
+    .mobile-nav button strong {
+      display: block;
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    .section-anchor {
+      scroll-margin-top: calc(var(--header-h) + 18px);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 1100px) {
+      .workspace {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        position: relative;
+        top: auto;
+      }
+      .hero-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .contact-card {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+      .contact-link {
+        width: 100%;
+        flex-basis: auto;
+      }
+      .steps.steps--row {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+      .steps,
+      .metrics,
+      .grid.four {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 780px) {
+      :root { --header-h: 68px; }
+      .workspace {
+        width: min(100vw - 20px, var(--content-max));
+        margin-top: 12px;
+        margin-bottom: 108px;
+      }
+      .topbar {
+        padding: 12px 14px;
+      }
+      .brand-mark { width: 38px; height: 38px; border-radius: 12px; }
+      .brand-text strong { font-size: 15px; }
+      .brand-text span { font-size: 11px; }
+      .top-meta .chip { display: none; }
+      .actions .icon-btn { width: 40px; height: 40px; border-radius: 13px; }
+      .sidebar { display: none; }
+      .mobile-contact { display: flex; }
+      .mobile-nav { display: flex; }
+      .section-head {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .grid.two,
+      .grid.three,
+      .grid.four,
+      .steps,
+      .metrics,
+      .exclusion-grid {
+        grid-template-columns: 1fr;
+      }
+      .steps.steps--row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .hero h1 { font-size: clamp(30px, 8vw, 44px); }
+      .hero p.lead { font-size: 15px; line-height: 1.7; }
+      .mini-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .step { min-height: 0; }
+      .mini { min-height: 104px; padding: 16px; }
+      .status-panel .mini strong { font-size: clamp(27px, 8vw, 37px); }
+      .status-panel .mini:nth-child(2) strong { font-size: clamp(24px, 7vw, 32px); }
+      .counter--hero { --counter-size: clamp(27px, 8vw, 37px); }
+      .status-panel .counter--hero { --counter-size: clamp(28px, 8.5vw, 38px); }
+      .status-panel .mini:nth-child(2) .counter--hero { --counter-size: clamp(24px, 7.4vw, 34px); }
+      .counter--metric { --counter-size: clamp(28px, 11vw, 44px); }
+      .counter--card { --counter-size: clamp(26px, 10vw, 40px); }
+      .memory .counter--metric { --counter-size: clamp(30px, 12vw, 48px); }
+      .metric .value { --metric-size: clamp(28px, 9.5vw, 44px); }
+      .memory .big { --memory-size: clamp(28px, 10vw, 46px); }
+      .rate-table {
+        gap: 6px;
+      }
+      .rate-row {
+        gap: 6px;
+        grid-template-columns: minmax(48px, 0.65fr) minmax(72px, 0.9fr) minmax(76px, 0.95fr) minmax(0, 1.9fr);
+      }
+      .rate-row > div {
+        padding: 10px 8px;
+        font-size: 12px;
+        line-height: 1.45;
+      }
+      .rate-row.rate-head > div {
+        font-size: 13.2px;
+      }
+      details.faq summary { padding: 14px 14px; font-size: 14px; }
+      details.faq .answer { padding: 0 14px 14px; }
+    }
+
+    @media (max-width: 520px) {
+      .workspace {
+        width: min(100vw - 14px, var(--content-max));
+      }
+      .hero,
+      .section-card,
+      .footer-card,
+      .sidebar {
+        border-radius: 22px;
+      }
+      .hero-actions .btn {
+        flex: 1 1 calc(50% - 5px);
+      }
+      .mini {
+        padding: 14px;
+        min-height: 96px;
+      }
+      .rate-row {
+        grid-template-columns: minmax(44px, 0.6fr) minmax(66px, 0.85fr) minmax(70px, 0.9fr) minmax(0, 1.85fr);
+        gap: 5px;
+      }
+      .rate-row > div {
+        padding: 9px 7px;
+        font-size: 11px;
+      }
+      .rate-row.rate-head > div {
+        font-size: 12px;
+      }
+      .status-panel .mini strong { font-size: clamp(26px, 9vw, 34px); }
+      .status-panel .mini:nth-child(2) strong { font-size: clamp(22px, 6.5vw, 28px); }
+      .counter--hero { --counter-size: clamp(26px, 9vw, 34px); }
+      .status-panel .counter--hero { --counter-size: clamp(27px, 9.5vw, 35px); }
+      .status-panel .mini:nth-child(2) .counter--hero { --counter-size: clamp(22px, 6.8vw, 30px); }
+      .counter--metric { --counter-size: clamp(26px, 12vw, 40px); }
+      .counter--card { --counter-size: clamp(24px, 11vw, 36px); }
+      .memory .counter--metric { --counter-size: clamp(28px, 13vw, 42px); }
+      .metric .value { --metric-size: clamp(26px, 10vw, 40px); }
+      .memory .big { --memory-size: clamp(26px, 11vw, 42px); }
+      .chip {
+        padding: 8px 11px;
+        font-size: 11px;
+      }
+    }
+
+    .topbar {
+      background: rgba(247, 245, 239, 0.96);
+      box-shadow: 0 1px 14px rgba(21, 23, 25, 0.05);
+      backdrop-filter: blur(16px);
+    }
+    .brand-mark {
+      background: var(--accent);
+      color: var(--text);
+      box-shadow: none;
+    }
+    .brand:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 4px;
+      border-radius: 14px;
+    }
+    .sidebar {
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: none;
+    }
+    .nav-link,
+    .sidebar-card,
+    .status-panel,
+    .mini,
+    .card,
+    .check,
+    .exclusion-guide,
+    .exclusion-item,
+    .step,
+    .method-block,
+    .rate-row > div,
+    .split-callout .callout,
+    .example-grid .example,
+    .metric,
+    .law-item,
+    details.faq {
+      background: var(--card);
+      border-color: var(--line);
+    }
+    .nav-link { color: var(--muted); }
+    .nav-link:hover { background: var(--bg2); color: var(--text); }
+    .nav-link.active {
+      background: rgba(199, 172, 118, 0.2);
+      border-color: var(--line-2);
+      box-shadow: none;
+      color: var(--text);
+    }
+    .sidebar-card,
+    .status-panel,
+    .check,
+    .exclusion-guide,
+    .exclusion-item,
+    .memory {
+      background: var(--bg2);
+    }
+    .hero,
+    .section-card,
+    .footer-card {
+      background: var(--panel);
+      backdrop-filter: none;
+    }
+    .hero::before { display: none; }
+    .eyebrow::before { box-shadow: none; }
+    .hero p.lead,
+    .sidebar-contact a,
+    .check span,
+    .step .stacked-note,
+    .metric .lead-note,
+    .rate-row .tier,
+    .rate-row .amount,
+    .memory strong {
+      color: var(--text);
+    }
+    .btn,
+    .icon-btn,
+    .chip {
+      background: var(--panel);
+      border-color: var(--line);
+      color: var(--text);
+    }
+    .btn:hover,
+    .icon-btn:hover { background: var(--bg2); }
+    .btn.primary {
+      background: var(--accent);
+      color: var(--text);
+    }
+    .sidebar-contact,
+    .contact-link {
+      background: rgba(199, 172, 118, 0.15);
+      border-color: var(--line-2);
+      color: var(--text);
+    }
+    .contact-link:hover,
+    .contact-link:focus-visible { background: rgba(199, 172, 118, 0.25); }
+    .tag {
+      background: rgba(199, 172, 118, 0.15);
+      border-color: var(--line-2);
+      color: #6b542e;
+    }
+    .tag.ok {
+      background: rgba(86, 121, 91, 0.12);
+      border-color: rgba(86, 121, 91, 0.24);
+      color: #426747;
+    }
+    .tag.warn {
+      background: rgba(199, 172, 118, 0.18);
+      border-color: var(--line-2);
+      color: #6b542e;
+    }
+    .exclusion-note {
+      background: rgba(199, 172, 118, 0.16);
+      color: #6b542e;
+    }
+    .step .no {
+      background: rgba(199, 172, 118, 0.2);
+      border-color: var(--line-2);
+      color: var(--text);
+    }
+    .rate-row.rate-head > div {
+      background: rgba(199, 172, 118, 0.2);
+      border-color: var(--line-2);
+      color: var(--text);
+    }
+    .search {
+      background: var(--panel);
+      color: var(--text);
+    }
+    .search:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(199, 172, 118, 0.18);
+    }
+    details.faq[open] { background: var(--card-2); }
+    .progress {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      box-shadow: none;
+    }
+    .float-top,
+    .mobile-nav {
+      background: rgba(247, 245, 239, 0.96);
+      color: var(--text);
+    }
+    .mobile-nav button {
+      background: var(--panel);
+      border-color: var(--line);
+      color: var(--text);
+    }
+
+    @media print {
+      body {
+        background: #fff;
+        color: #111;
+      }
+      body::before,
+      body::after,
+      .topbar,
+      .sidebar,
+      .mobile-nav,
+      .progress,
+      .float-top,
+      .actions {
+        display: none !important;
+      }
+      .workspace {
+        width: 100%;
+        margin: 0;
+        display: block;
+      }
+      .hero,
+      .section-card,
+      .footer-card,
+      .card,
+      .step,
+      .metric,
+      details.faq {
+        background: #fff;
+        color: #111;
+        border-color: #cfcfcf;
+        box-shadow: none;
+      }
+      .card p,
+      .check span,
+      .step p,
+      .metric p,
+      .law-item span,
+      .footer-note,
+      .hero p.lead,
+      .sidebar-card p,
+      .faq-count,
+      details.faq .answer,
+      .section-head p,
+      .nav-link,
+      .brand-text span {
+        color: #444;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="메인 소개 사이트로 돌아가기">
+        <div class="brand-text">
+          <strong>외부강의등 신고 가이드</strong>
+          <span>청탁금지법 제10조(외부강의등의 사례금 제한) </span>
+        </div>
+      </a>
+      <div class="top-meta">
+        <a 
+          href="https://www.acrc.go.kr/menu.es?mid=a10101060400" 
+          class="chip" 
+          target="_blank" 
+          rel="noopener noreferrer"
+        >
+          <strong>한눈에 보는 청탁금지법</strong>
+        </a>
+
+        <div class="actions">
+          <button class="icon-btn" id="printBtn" type="button" title="인쇄">⎙</button>
+          <button class="icon-btn" id="topBtn" type="button" title="맨 위로">↑</button>
+        </div>
+      </div>
+
+    </header>
+
+    <div class="workspace">
+      <aside class="sidebar" aria-label="페이지 이동">
+        <h2>QUICK NAV</h2>
+        <nav id="sideNav">
+          <a class="nav-link active" href="#overview"><span>개요</span><small>01</small></a>
+          <a class="nav-link" href="#check"><span>판단 기준</span><small>02</small></a>
+          <a class="nav-link" href="#report"><span>신고 기준</span><small>03</small></a>
+          <a class="nav-link" href="#limits"><span>사례금 상한</span><small>04</small></a>
+          <a class="nav-link" href="#excess"><span>초과사례금</span><small>05</small></a>
+          <a class="nav-link" href="#forms"><span>FAQ</span><small>06</small></a>
+          <a class="nav-link" href="#tuition"><span>강사료 산정기준</span><small>07</small></a>
+        </nav>
+        <div class="sidebar-card">
+          <strong>주요내용</strong>
+          <p>강의인지, 사례금이 있는지,국가·지자체 요청인지, 월 횟수·시간을 넘는지, 초과사례금이 있는지 순서대로 확인하세요.</p>
+        </div>
+        <div class="sidebar-contact">
+          <span>CONTACT</span>
+          <a href="mailto:odw0902@korea.kr">양산시인공지능연구동호회<br />오대웅(odw0902@korea.kr)</a>
+        </div>
+      </aside>
+
+      <main class="main">
+        <section class="hero section-anchor" id="overview">
+          <span class="eyebrow">PUBLIC OFFICIAL GUIDE</span>
+          <div class="hero-grid">
+            <div>
+              <h1>외부강의<br /><mark>정확한 신고부터</mark></h1>
+              <p class="lead">
+                공직자등이 직무와 관련되거나,<br> 자신의 지위·직책 영향력으로 요청받은 모든 교육·강연 등
+                외부강의 판단, 신고, 초과사례금 처리까지 확인하세요
+              </p>
+              
+              <div class="hero-actions">
+                <button class="btn" type="button" data-jump="#report">신고 기준</button>
+                <button class="btn" type="button" data-jump="#forms">FAQ 바로가기</button>
+              </div>
+            </div>
+
+            <div class="status-panel">
+              <div class="status-top">
+                <div>
+                  <strong>숫자로 보는 신고기준</strong>
+                  <span>소속기관장에게 신고의무 불이행시 징계처분</span>
+                </div>
+              </div>
+              <div class="mini-grid">
+                <div class="mini">
+                  <strong><span class="counter counter--hero" data-target="10" data-suffix="일">0일</span></strong>
+                  <span>기본 신고 시한</span>
+                </div>
+                <div class="mini">
+                  <strong><span class="counter counter--hero" data-target="40" data-suffix="만원">0만원</span></strong>
+                  <span>1시간 상한액</span>
+                </div>
+                <div class="mini">
+                  <strong><span class="counter counter--hero" data-target="3" data-suffix="회">0회</span></strong>
+                  <span>월 횟수 기준</span>
+                </div>
+                <div class="mini">
+                  <strong><span class="counter counter--hero" data-target="6" data-suffix="시간">0시간</span></strong>
+                  <span>월 시간 기준</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="exclusion-guide">
+            <strong>신고대상 제외 「국가기관 및 지방자치단체」 범위</strong>
+            <div class="exclusion-grid">
+              <div class="exclusion-item">
+                <strong>국가기관</strong>
+                <p>- 「정부조직법」상 중앙행정기관 및 그 소속기관 제외</br>국회, 법원, 헌법재판소, 선거관리위원회, 감사원 등 헌법기관과 국가인권위원회, 고위공직자범죄수사처 등</p>
+                <p style="margin-top: 8px;">- 국립 유치원·초·중·고등학교·대학교는 교육부 소속</p>
+              </div>
+              <div class="exclusion-item">
+                <strong>지방자치단체 및 교육청</strong>
+                <p>- 광역·기초자치단체, 지방의회, 17개 시·도교육청과 해당 지방정부의 행정기구 조례에 포함된 직속기관·사업소 제외</p>
+                <p style="margin-top: 8px;">- 유치원·초·중·고등·대학교는 교육청 또는 지방정부 소속</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-card section-anchor" id="check">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">01 / 판단 기준</p>
+              <h2 class="section-title">먼저, <mark>외부강의등</mark>인지 확인</h2>
+            </div>
+            <p>직무 관련성, 전달 형태 등을 고려해야 합니다.</p>
+          </div>
+          <div class="grid two">
+            <div class="card">
+              <strong>외부강의등에 해당할 가능성이 큰 경우</strong>
+              <div class="checklist">
+                <div class="check"><div class="bullet"></div><div><strong>강의·강연·기고</strong><span>다수인에게 의견이나 지식을 전달하는 형태</span></div></div>
+                <div class="check"><div class="bullet"></div><div><strong>교육·세미나·공청회</strong><span>행사 명칭보다 실제 전달 방식 중요</span></div></div>
+                <div class="check"><div class="bullet"></div><div><strong>회의 형태의 참석</strong><span>회의에 참여해 의견을 전달하는 경우도 포함될 수 있음</span></div></div>
+              </div>
+            </div>
+            <div class="card">
+              <strong>외부강의등이 아닌 경우로 안내된 예시</strong>
+              <div class="checklist">
+                <div class="check"><div class="bullet"></div><div><strong>겸직허가 범위 내 학교 출강</strong><span>소속기관장 허가를 받은 겸직 수행은 별도 확인 필요</span></div></div>
+                <div class="check"><div class="bullet"></div><div><strong>개별 방송 인터뷰</strong><span>사회자와의 단순 인터뷰는 다수 대상 전달과 다를 수 있음</span></div></div>
+                <div class="check"><div class="bullet"></div><div><strong>법령상 위원회 업무</strong><span>위원으로서의 법정 업무는 일반 외부강의와 구분됨</span></div></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-card section-anchor" id="report">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">02 / 신고 기준</p>
+              <h2 class="section-title">신고 대상과 <mark>신고 시점</mark></h2>
+            </div>
+            <p>사례금 여부 및 공공기관에서 요청인지 확인합니다.</p>
+          </div>
+
+          <div class="metrics">
+            <div class="metric">
+              <span class="value"><span class="counter counter--metric" data-target="10" data-suffix="일">0일</span></span>
+              <p>- 외부강의등을 마친 날부터 기본 신고 가능 기간</p>
+              <p>- 사례금이 없는 외부강의등은 신고의무가 없음</p>
+            </div>
+            <div class="metric">
+              <span class="value"><span class="counter counter--metric" data-target="5" data-suffix="일">0일</span></span>
+              <p>- 신고 시 알 수 없던 내용은 안 날부터 보완 신고</p>
+              <p>- 국가·지자체 요청은 신고대상에서 제외</p>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top: 14px;">
+            <strong>신고 흐름</strong>
+            <div class="steps steps--row">
+              <div class="step">
+                <div class="no">1</div>
+                <strong>사례금 유무</strong>
+                <p>사례금이 없으면 행동강령상 신고의무가 없음</p>
+              </div>
+              <div class="step">
+                <div class="no">2</div>
+                <strong>요청기관 확인</strong>
+                <p>국가·지자체 요청인지, 그 외 기관인지 확인</p>
+              </div>
+              <div class="step">
+                <div class="no">3</div>
+                <strong>신고 시점</strong>
+                <p>원칙적으로 마친 날부터 10일 이내, 사전 인지 시 사전신고 가능</p>
+              </div>
+              <div class="step">
+                <div class="no">4</div>
+                <strong>보완 신고</strong>
+                <p>상세 명세가 뒤늦게 확인되면 안 날부터 5일 이내 보완</p>
+              </div>
+            </div>
+            <div class="method-block method-block--wide">
+              <strong>신고절차</strong>
+              <p>
+                새올정보시스템 감사 메뉴에서 외부강의등 신고서를 작성하고,
+                요청기관 공문과 함께 감사부서에 공문으로 제출.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-card section-anchor" id="limits">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">03 / 상한 기준</p>
+              <h2 class="section-title">사례금과 <mark>횟수·시간</mark> 제한</h2>
+            </div>
+            <p>숫자 암기로 징계처분을 예방할 할 수 있습니다.</p>
+          </div>
+
+          <div class="grid four">
+            <div class="card">
+              <strong>월 횟수</strong>
+              <p><span class="counter counter--card" data-target="3" data-suffix="회">0회</span></p>
+              <p>대가를 받는 외부강의 기준</p>
+            </div>
+            <div class="card">
+              <strong>월 시간</strong>
+              <p><span class="counter counter--card" data-target="6" data-suffix="시간">0시간</span></p>
+              <p>대가를 받는 외부강의 시간</p>
+            </div>
+            <div class="card">
+              <strong>청탁금지법 1시간 상한</strong>
+              <p><span class="counter counter--card" data-target="40" data-suffix="만원">0만원</span></p>
+              <p>공직자가 받을 수 있는 상한액</p>
+            </div>
+            <div class="card">
+              <strong>청탁금지법 총액 상한</strong>
+              <p><span class="counter counter--card" data-target="60" data-suffix="만원">0만원</span></p>
+              <p>1시간 초과 시 총액 한도</p>
+            </div>
+          </div>
+
+          <div class="grid two" style="margin-top: 14px;">
+            <div class="card">
+              <strong>횟수·시간 초과 시</strong>
+              <div class="checklist">
+                <div class="check"><div class="bullet"></div><div><strong>월 3회 또는 6시간 초과</strong><span>기관 기준에 따라 사전 승인 여부 확인 필요</span></div></div>
+                <div class="check"><div class="bullet"></div><div><strong>국가·지자체 요청</strong><span>미신고 대상이라 횟수 계산에서 제외</span></div></div>
+                <div class="check"><div class="bullet"></div><div><strong>공정성 저해 우려</strong><span>기관장은 공정한 직무수행을 위해 제한할 수 있음</span></div></div>
+              </div>
+            </div>
+            <div class="card">
+              <strong>사례금 상한 / 예외</strong>
+              <div class="checklist">
+                <div class="check"><div class="bullet"></div><div><strong>강의료·원고료·출연료</strong><span>외부강의등과 관련해 받은 일체의 대가</span></div></div>
+                <div class="check"><div class="bullet"></div><div><strong>여비 실비</strong><span>요청기관에서 여비를 받지 못한 경우, 소속기관에서 실비 별도 청구가능.</span></div></div>
+                <div class="check warn"><div class="bullet"></div><div><strong>신고 제외와 상한은 별개</strong><span>국가·지자체 요청으로 신고가 제외되어도 상한 규정준수 필요</span></div></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-card section-anchor" id="excess">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">05 / 초과사례금</p>
+              <h2 class="section-title">초과사례금은 <mark> 2일 이내 즉시 처리</mark></h2>
+            </div>
+            <p>처리 속도가 중요합니다.</p>
+          </div>
+
+          <div class="card" style="margin-top: 14px;">
+            <strong>처리 순서</strong>
+            <div class="steps steps--row">
+              <div class="step"><div class="no">1</div><strong>확인</strong><p>초과금액이 있는지 받은 사실을 알게 된 시점부터 봅니다.</p></div>
+              <div class="step"><div class="no">2</div><strong>2일 이내 신고</strong><p>행동강령책임관에게 서면 신고합니다.</p></div>
+              <div class="step"><div class="no">3</div><strong>반환</strong><p>초과금액을 제공자에게 지체 없이 반환합니다.</p></div>
+              <div class="step"><div class="no">4</div><strong>증빙 보관</strong><p>반환 사실과 증빙자료를 정리해 둡니다.</p></div>
+            </div>
+            <div class="method-block method-block--wide">
+              <strong>처리절차</strong>
+              <p>초과사례금을 알게 된 뒤에는 2일 이내 신고하고, 초과금액은 바로 반환한 뒤 증빙을 정리해 둡니다.</p>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top: 14px;">
+            <strong>기억하기 쉬운 문장</strong>
+            <p class="display">“<mark>2일 신고 → 바로 반환 → 증빙 보관</mark>”</p>
+            <p class="footer-note">
+              반환 비용 청구가 가능한 경우에는 증빙자료를 함께 챙겨두면 실무가 훨씬 수월합니다.
+            </p>
+          </div>
+        </section>
+
+        <section class="section-card section-anchor" id="forms">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">06 / FAQ</p>
+              <h2 class="section-title">외부강의 신고 <mark>자주 묻는 질문</mark></h2>
+            </div>
+            <p>2026년 9월기준 주요질의 응답입니다.</p>
+          </div>
+
+          <div class="faq-toolbar" style="margin-top: 14px;">
+            <input id="faqSearch" class="search" type="search" placeholder="예: 대학 출강, 인터뷰, 근무시간, 사례금, 위원회" />
+            <span class="faq-count" id="faqCount">10개 질문</span>
+          </div>
+
+          <div class="faq-list" id="faqList">
+            <details class="faq" open>
+              <summary><span>공청회·간담회 사회자 역할도 외부강의등인가요?</span><span class="arrow">⌄</span></summary>
+              <div class="answer">다수인을 대상으로 의견·지식을 전달하거나 회의 형태라면 외부강의등에 해당할 수 있습니다. 단순 진행 역할인지, 실제로 의견을 전달하는지 구분해서 봐야 합니다.</div>
+            </details>
+            <details class="faq">
+              <summary><span>사례금을 받지 않으면 신고하지 않아도 되나요?</span><span class="arrow">⌄</span></summary>
+              <div class="answer">제공된 안내문 기준으로는 사례금을 받지 않는 외부강의등은 행동강령상 신고의무가 없습니다.</div>
+            </details>
+            <details class="faq">
+              <summary><span>대학 출강에 겸직허가가 있으면 어떻게 보나요?</span><span class="arrow">⌄</span></summary>
+              <div class="answer">소속기관장의 사전 겸직허가 범위 내에서 수행하는 경우에는 별도 외부강의등이 아닙니다.</div>
+            </details>
+            <details class="faq">
+              <summary><span>근무시간 외 강의도 신고 대상인가요?</span><span class="arrow">⌄</span></summary>
+              <div class="answer">사례금을 받는 외부강의등이라면 근무시간과 관계없이 신고 대상입니다.</div>
+            </details>
+            <details class="faq">
+              <summary><span>30분 강의도 사례금 상한이 적용되나요?</span><span class="arrow">⌄</span></summary>
+              <div class="answer">1시간 이내 강의도 1시간 기준 상한이 적용할 수 있습니다..</div>
+            </details>
+            <details class="faq">
+              <summary><span>외국대학·국제기구 초청은 어떻게 보나요?</span><span class="arrow">⌄</span></summary>
+              <div class="answer">외국기관 요청인 경우 해당 외국기관의 지급기준을 따를 수 있습니다.</div>
+            </details>
+            <details class="faq">
+              <summary><span>경진대회 직접 신청 발표도 외부강의등인가요?</span><span class="arrow">⌄</span></summary>
+              <div class="answer">직접 신청해 참가하는 경우는 외부로부터 요청받은 것으로 보기 어렵고, 다만 별도 초청이 있으면 달라질 수 있습니다.</div>
+            </details>
+            <details class="faq">
+              <summary><span>법령상 위원회 참석도 신고하나요?</span><span class="arrow">⌄</span></summary>
+              <div class="answer">법령에 따라 설치된 위원회의 위원으로서 업무를 수행하는 것은 외부강의등과 구분됩니다.</div>
+            </details>
+            <details class="faq">
+              <summary><span>신고를 놓치면 나중에 몰랐다고 해도 되나요?</span><span class="arrow">⌄</span></summary>
+              <div class="answer">행동강령 위반은 고의·과실과 별개로 문제될 수 있으니, 애매하면 출강 전 행동강령책임관이나 감사부서에 확인하는 편이 안전합니다.</div>
+            </details>
+            <details class="faq">
+              <summary><span>실무상 가장 먼저 확인할 것은 무엇인가요?</span><span class="arrow">⌄</span></summary>
+              <div class="answer">외부강의등 해당 여부, 사례금 유무, 요청기관이 국가·지자체인지, 월 횟수·시간, 초과사례금 발생 여부를 순서대로 보면 됩니다.</div>
+            </details>
+          </div>
+        </section>
+
+        <section class="section-card section-anchor" id="tuition">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">07 / 강사료 산정기준</p>
+              <h2 class="section-title">지방자치인재개발원 <mark>강사료 산정기준</mark></h2>
+            </div>
+            <p>지급 기준과 법정 상한은 다른 기준입니다.</p>
+          </div>
+
+          <div class="card">
+            <strong class="rate-table-title">2026년 지방자치인재개발원 강사수당 기준</strong>
+            <div class="rate-table-wrap" aria-label="강사수당 기준 표">
+              <div class="rate-table">
+                <div class="rate-row rate-head">
+                  <div>자격</div>
+                  <div>최초 1시간</div>
+                  <div>초과 매시간</div>
+                  <div>주요 대상</div>
+                </div>
+                <div class="rate-row">
+                  <div class="tier">특1급</div>
+                  <div class="amount">40만원</div>
+                  <div class="amount">30만원*</div>
+                  <div>전직장관, 대학총장, 전직국회의원·단체장, 대기업회장 등</div>
+                </div>
+                <div class="rate-row">
+                  <div class="tier">특2급</div>
+                  <div class="amount">30만원</div>
+                  <div class="amount">20만원</div>
+                  <div>전직 차관급, 전직 공기업 대표, 전직 기초단체장 등</div>
+                </div>
+                <div class="rate-row">
+                  <div class="tier">1급</div>
+                  <div class="amount">25만원</div>
+                  <div class="amount">12만원</div>
+                  <div>전직 4급 이상 공무원, 교수, 기관 임원, 경력 전문자격자 등</div>
+                </div>
+                <div class="rate-row">
+                  <div class="tier">2급</div>
+                  <div class="amount">15만원</div>
+                  <div class="amount">8만원</div>
+                  <div>5급 이하 공무원, 대학강사, 기관부장급, 경력 전문자격자 등</div>
+                </div>
+                <div class="rate-row">
+                  <div class="tier">3급</div>
+                  <div class="amount">10만원</div>
+                  <div class="amount">5만원</div>
+                  <div>전산·외국어 강사, 일정 경력 취미·소양 강사 등</div>
+                </div>
+                <div class="rate-row">
+                  <div class="tier">4급</div>
+                  <div class="amount">8만원</div>
+                  <div class="amount">4만원</div>
+                  <div>취미·소양·체육 등 강사</div>
+                </div>
+                <div class="rate-row">
+                  <div class="tier">5급</div>
+                  <div class="amount">6만원</div>
+                  <div class="amount">3만원</div>
+                  <div>실기·실습 보조강사</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top: 14px;">
+            <!-- <strong>꼭 구분할 것</strong> -->
+            <div class="split-callout">
+              <div class="callout">
+                <strong>강의 요청기관 지급기준</strong>
+                <span>지방자치인재개발원 기준은 강사수당을 지급할 때 기관이 준용할 수 있는 단가입니다.</span>
+              </div>
+              <div class="callout">
+                <strong>강사료 청탁금지법 상한</strong>
+                <span>청탁금지법은 공직자가 받을 수 있는 최대 상한을 정합니다. 현재 시간당 40만원, 1시간 초과 시 총액 60만원을 초과할 수 없습니다.</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <footer class="footer-card contact-card mobile-contact" aria-label="문의처">
+          <div>
+            <span class="eyebrow">CONTACT</span>
+            <h2>문의 및 의견</h2>
+          </div>
+          <a class="contact-link" href="mailto:odw0902@korea.kr">양산시인공지능연구동호회<br /> 오대웅(odw0902@korea.kr)</a>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <div class="mobile-nav" aria-label="모바일 빠른 이동">
+    <button type="button" data-jump="#overview"><span>외부강의</span><strong>처음</strong></button>
+    <button type="button" data-jump="#report"><span>신고</span><strong>기준</strong></button>
+    <button type="button" data-jump="#limits"><span>상한</span><strong>금액</strong></button>
+    <button type="button" data-jump="#forms"><span>FAQ</span><strong>서식</strong></button>
+    <button type="button" data-jump="#tuition"><span>강사료</span><strong>기준</strong></button>
+  </div>
+
+  <button class="float-top" id="floatTop" type="button" title="맨 위로">↑</button>
+
+  <script>
+    (() => {
+      const sectionIds = ["overview", "check", "report", "limits", "excess", "forms", "tuition"];
+      const sections = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
+      const sideLinks = [...document.querySelectorAll(".nav-link")];
+      const jumps = [...document.querySelectorAll("[data-jump]")];
+      const floatTop = document.getElementById("floatTop");
+      const progress = document.getElementById("progress");
+      const printBtn = document.getElementById("printBtn");
+      const topBtn = document.getElementById("topBtn");
+      const faqSearch = document.getElementById("faqSearch");
+      const faqCount = document.getElementById("faqCount");
+      const faqItems = [...document.querySelectorAll(".faq")];
+
+      function scrollToId(id) {
+        const el = document.querySelector(id);
+        if (!el) return;
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      jumps.forEach((btn) => {
+        btn.addEventListener("click", () => scrollToId(btn.getAttribute("data-jump")));
+      });
+
+      printBtn.addEventListener("click", () => window.print());
+      topBtn.addEventListener("click", () => scrollToId("#overview"));
+      floatTop.addEventListener("click", () => scrollToId("#overview"));
+
+      const animateCounters = () => {
+        const seen = new WeakSet();
+        const counters = [...document.querySelectorAll(".counter")];
+        const order = new Map(counters.map((el, index) => [el, index]));
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        const renderCounter = (el, value) => {
+          const suffix = (el.dataset.suffix || "").trim();
+          el.textContent = `${value.toLocaleString("ko-KR")}${suffix}`;
+        };
+
+        const runCounter = (el, target) => {
+          if (prefersReducedMotion) {
+            renderCounter(el, target);
+            return;
+          }
+
+          const baseDuration =
+            el.classList.contains("counter--hero") ? 1120 :
+            el.classList.contains("counter--metric") ? 980 :
+            860;
+          const duration = Math.max(650, Math.min(1400, baseDuration + Math.min(180, Math.abs(target) * 18)));
+          const start = performance.now();
+          const animate = (now) => {
+            const progress = Math.min(1, (now - start) / duration);
+            const eased = 1 - Math.pow(1 - progress, 4);
+            const value = Math.round(target * eased);
+            renderCounter(el, value);
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+              return;
+            }
+            el.classList.remove("is-animating");
+          };
+
+          el.classList.add("is-animating");
+          requestAnimationFrame(animate);
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target;
+            if (seen.has(el)) return;
+            seen.add(el);
+            const target = Number(el.dataset.target || 0);
+            const delay = Math.min(220, (order.get(el) || 0) * 60);
+            if (delay > 0) {
+              window.setTimeout(() => runCounter(el, target), delay);
+            } else {
+              runCounter(el, target);
+            }
+          });
+        }, { threshold: 0.15, rootMargin: "0px 0px -10% 0px" });
+
+        counters.forEach((el) => observer.observe(el));
+      };
+      animateCounters();
+
+      const updateActiveNav = () => {
+        const offset = window.scrollY + 140;
+        let activeId = "overview";
+        sections.forEach((section) => {
+          if (section.offsetTop <= offset) activeId = section.id;
+        });
+        sideLinks.forEach((link) => {
+          const active = link.getAttribute("href") === `#${activeId}`;
+          link.classList.toggle("active", active);
+          if (active) link.setAttribute("aria-current", "page");
+          else link.removeAttribute("aria-current");
+        });
+      };
+
+      const updateProgress = () => {
+        const doc = document.documentElement;
+        const max = doc.scrollHeight - window.innerHeight;
+        const value = max > 0 ? (window.scrollY / max) * 100 : 0;
+        progress.style.width = `${Math.min(100, Math.max(0, value))}%`;
+        floatTop.classList.toggle("show", window.scrollY > 420);
+      };
+
+      window.addEventListener("scroll", () => {
+        updateActiveNav();
+        updateProgress();
+      }, { passive: true });
+
+      updateActiveNav();
+      updateProgress();
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const id = `#${entry.target.id}`;
+          sideLinks.forEach((link) => link.classList.toggle("active", link.getAttribute("href") === id));
+        });
+      }, { threshold: 0.35, rootMargin: "-8% 0px -55% 0px" });
+      sections.forEach((section) => observer.observe(section));
+
+      faqSearch.addEventListener("input", () => {
+        const q = faqSearch.value.trim().toLowerCase();
+        let visible = 0;
+        faqItems.forEach((item) => {
+          const text = item.textContent.toLowerCase();
+          const show = text.includes(q);
+          item.style.display = show ? "" : "none";
+          if (show) visible += 1;
+        });
+        faqCount.textContent = `${visible}개 질문`;
+      });
+    })();
+  </script>
+</body>
+</html>

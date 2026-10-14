@@ -18,3 +18,12 @@
   .agency-band>div{display:contents}
   .agency-band img,.agency-band img.nia{width:100%;min-width:0}
 }
+
+.wordmark img{width:2em;height:1.7em;object-fit:cover;object-position:left center;flex:none}
+.wordmark .wordmark-name{display:inline;border:0;padding:0;font-size:inherit;font-weight:inherit;letter-spacing:normal;white-space:nowrap}
+@media(max-width:700px){
+  .wordmark{gap:7px;font-size:16px}
+  .wordmark img{width:2em;height:1.7em}
+  .header nav{gap:clamp(7px,2.3vw,12px);font-size:11px}
+}
+.lecture-link{display:inline-block;margin-top:24px}
