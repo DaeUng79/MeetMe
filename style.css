@@ -96,7 +96,7 @@ footer{display:flex;gap:25px;align-items:center;justify-content:space-between;pa
 @media(max-width:700px){.hero h1{font-size:clamp(32px,8vw,43px)}}
 
 @media(max-width:700px){
-  .hero h1 br,.section h2 br,.courses h3 br{display:none}
+  .work h2 br,.courses h3 br{display:none}
 }
 
 .identity{padding:0;min-height:0}
