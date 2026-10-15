@@ -225,6 +225,11 @@ function fittedText(ctx,value,x,baseline,maxWidth,size,color,bold=false,minSize=
   if(ctx.measureText(display).width>maxWidth){while(display.length && ctx.measureText(display+'…').width>maxWidth) display=display.slice(0,-1);display+='…';}
   ctx.fillStyle=color;ctx.textAlign=align;ctx.fillText(display,x,baseline);ctx.textAlign='left';
 }
+function pacLabel(ctx,x,baseline,color) {
+  font(ctx,25.5); ctx.fillStyle=color; ctx.fillText('PAC',x,baseline);
+  const suffixX=x+ctx.measureText('PAC').width+4;
+  font(ctx,17); ctx.fillText('(Public AI Champion)',suffixX,baseline);
+}
 function imageOrText(ctx,img,x,y,w,h,label) {
   if(img) ctx.drawImage(img,x,y,w,h);
   else fittedText(ctx,label,x,y+h*.75,w,22,COLOR.black,true);
@@ -251,6 +256,7 @@ function front(ctx,concept) {
   const role=[data.affiliation,data.title].filter(Boolean).join('  |  ');
   if(concept==='c') {
     fittedText(ctx,data.name,70,154,450,64,fg,true,35);
+    font(ctx,64,true); pacLabel(ctx,70+ctx.measureText(data.name).width+13,155,COLOR.gold);
     fittedText(ctx,role,74,200,460,23,fg,false,15);
     rule(ctx,73,235,135,235,COLOR.gold,2);
     fittedText(ctx,data.phone,74,289,490,25,fg,false,17);
@@ -271,6 +277,7 @@ function front(ctx,concept) {
     if(dark) fittedText(ctx,data.grade,Math.min(480,73+ctx.measureText(data.certLabel).width+13),62,360,28,COLOR.gold,true,18);
     fittedText(ctx,data.certCode,73,94,480,17,dark?'#aaa69d':COLOR.gray,false,11);
     fittedText(ctx,data.name,70,198,560,64,fg,true,35);
+    font(ctx,64,true); pacLabel(ctx,70+ctx.measureText(data.name).width+13,199,dark?COLOR.gold:COLOR.gray);
     fittedText(ctx,role,74,241,560,23,fg,false,15);
     rule(ctx,73,275,135,275,COLOR.gold,2);
     fittedText(ctx,data.phone,74,320,560,25,fg,false,17);
