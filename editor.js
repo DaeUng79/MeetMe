@@ -1,6 +1,14 @@
 const SIZE = { width: 860, height: 520, exportWidth: 2032, exportHeight: 1228, dpi: 600 };
 const COLOR = { black: '#151719', gold: '#c7ac76', ivory: '#f7f5ef', gray: '#61666b' };
 const STORAGE_KEY = 'meetme-card-editor-v1';
+const PREVIOUS_LEFT_ITEMS = [
+  '26년 AI챔피언 블랙 등급',
+  '26년 인공지능을 활용한 행정혁신의 달인 선정',
+  '26년 빅데이터분석기사 취득',
+  '24년 데이터 분석 준전문가 취득(ADsP-041014800)',
+  '24년 아키텍처준전문가 자격취득(DAsP-057001770)',
+  '24년 SQL개발자 취득(SQLD-054020931)'
+].join('\n');
 const DEFAULTS = {
   certLabel: 'AI챔피언', grade: 'BLACK', certCode: '2026-BC0663(임시데이터)',
   name: '오대웅', affiliation: '양산시', title: '지방전산주사',
@@ -11,11 +19,11 @@ const DEFAULTS = {
   leftHeading: 'AI 연구 스킬', rightHeading: '연구 수상 실적',
   leftItems: [
     '26년 AI챔피언 블랙 등급',
-    '26년 인공지능을 활용한 행정혁신의 달인 선정',
-    '26년 빅데이터분석기사 취득',
-    '24년 데이터 분석 준전문가 취득(ADsP-041014800)',
-    '24년 아키텍처준전문가 자격취득(DAsP-057001770)',
-    '24년 SQL개발자 취득(SQLD-054020931)'
+    '26년 인공지능을 활용한 행정혁신의 달인',
+    '26년 빅데이터분석기사',
+    '24년 데이터 분석 준전문가(ADsP-041014800)',
+    '24년 아키텍처준전문가(DAsP-057001770)',
+    '24년 SQL개발자(SQLD-054020931)'
   ].join('\n'),
   rightItems: [
     '25년 경상남도 혁신 우수사례 경진대회 대상 수상',
@@ -48,7 +56,11 @@ const canvases = new Map();
 const status = document.getElementById('status');
 
 function loadSaved() {
-  try { return {...DEFAULTS, ...JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}')}; }
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    if (saved.leftItems === PREVIOUS_LEFT_ITEMS) saved.leftItems = DEFAULTS.leftItems;
+    return {...DEFAULTS, ...saved};
+  }
   catch { return {...DEFAULTS}; }
 }
 function save() {
