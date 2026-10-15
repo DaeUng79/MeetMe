@@ -172,7 +172,7 @@ async function removeUpload(key) {
 const CONCEPTS = [
   {key:'a',name:'01 · BLACK & GOLD',desc:'검정 바탕 · 골드 인증'},
   {key:'b',name:'02 · IVORY & BLACK',desc:'밝은 바탕 · 블랙 인증'},
-  {key:'c',name:'03 · RIGHT SIGNATURE',desc:'오른쪽에 크게 배치한 인증'}
+  {key:'c',name:'03 · BLACK & GOLD / RIGHT SIGNATURE',desc:'검정 바탕 · 오른쪽 골드 인증'}
 ];
 for (const concept of CONCEPTS) {
   const section = document.createElement('article'); section.className='concept';
