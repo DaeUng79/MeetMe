@@ -124,6 +124,7 @@ def back(theme):
             txt(d,x,y,'· '+item,18,GRAY)
     rect(d,680,300,190,190,'#FFFFFF'); qr(d,680,300,190)
     round_rect(d,34,12,832,60,12,BLACK)
+    #삭제
     txt(d,55,34,'로컬 AX 상담 · 업무자동화 강의 · 워크숍',21,IVORY,True)
     txt(d,607,35,'daeung79.github.io/MeetMe',15,'#D9C9A6')
     return d
