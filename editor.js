@@ -256,7 +256,7 @@ function front(ctx,concept) {
   const role=[data.affiliation,data.title].filter(Boolean).join('  |  ');
   if(concept==='c') {
     fittedText(ctx,data.name,70,154,450,64,fg,true,35);
-    font(ctx,64,true); pacLabel(ctx,70+ctx.measureText(data.name).width+13,155,COLOR.gold);
+    font(ctx,64,true); pacLabel(ctx,70+ctx.measureText(data.name).width+13,155,fg);
     fittedText(ctx,role,74,200,460,23,fg,false,15);
     rule(ctx,73,235,135,235,COLOR.gold,2);
     fittedText(ctx,data.phone,74,289,490,25,fg,false,17);
@@ -277,7 +277,7 @@ function front(ctx,concept) {
     if(dark) fittedText(ctx,data.grade,Math.min(480,73+ctx.measureText(data.certLabel).width+13),62,360,28,COLOR.gold,true,18);
     fittedText(ctx,data.certCode,73,94,480,17,dark?'#aaa69d':COLOR.gray,false,11);
     fittedText(ctx,data.name,70,198,560,64,fg,true,35);
-    font(ctx,64,true); pacLabel(ctx,70+ctx.measureText(data.name).width+13,199,dark?COLOR.gold:COLOR.gray);
+    font(ctx,64,true); pacLabel(ctx,70+ctx.measureText(data.name).width+13,199,fg);
     fittedText(ctx,role,74,241,560,23,fg,false,15);
     rule(ctx,73,275,135,275,COLOR.gold,2);
     fittedText(ctx,data.phone,74,320,560,25,fg,false,17);
