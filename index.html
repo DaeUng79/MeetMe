@@ -7,11 +7,20 @@
   <meta name="theme-color" content="#151719">
   <link rel="stylesheet" href="style.css">
   <script>
+    // Keep the browser from restoring the previous scroll position on reload.
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+
     const navigation = performance.getEntriesByType("navigation")[0];
     if (navigation?.type === "reload") {
-      history.scrollRestoration = "manual";
       window.addEventListener("pageshow", () => {
-        requestAnimationFrame(() => window.scrollTo(0, 0));
+        // Run after the browser's initial layout/anchor handling on desktop and mobile.
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          const root = document.documentElement;
+          const previousBehavior = root.style.scrollBehavior;
+          root.style.scrollBehavior = "auto";
+          window.scrollTo(0, 0);
+          root.style.scrollBehavior = previousBehavior;
+        }));
       }, { once: true });
     }
   </script>
