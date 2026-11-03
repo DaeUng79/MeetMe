@@ -2,6 +2,11 @@
 
 확인 기준: 2026-10-13
 
+## 최근 프로젝트 (2026-11-03 확인)
+- [심사임당 저장소 README](https://github.com/DaeUng79/Otopilot_team_v0.2/blob/main/README.MD): 제안평가 흐름, AI 기능, 팀원별 담당 분야를 확인했습니다. [GitHub Pages 소개 화면](https://daeung79.github.io/Otopilot_team_v0.2/)은 HTTP 200 응답을 확인했습니다. 운영 중인 평가 서비스로 표기하지 않습니다.
+- [ReportAI 저장소 README](https://github.com/DaeUng79/ReportAI/blob/main/README.MD): 로컬 LLM을 활용한 보고서·보충자료·월간계획 기능과 [소개 페이지](https://daeung79.github.io/ReportAI/) 링크를 확인했습니다.
+- [MemoMindAI 저장소 README](https://github.com/DaeUng79/MemoMindAI/blob/main/README.MD): 메모 등록·검색, 관련 메모 기반 질문 응답, JSON 인수인계 기능을 확인했습니다. GitHub Pages는 활성화되어 있지 않아 저장소만 연결했습니다.
+
 ## 인증과 경력
 - 첨부 `2026-BC0663.pdf`: 오대웅, 경상남도 양산시, AI챔피언 **블루**, 2026-08-26, 인증번호 2026-BC0663. 블랙 인증번호와 일자는 확인되지 않아 기재하지 않았습니다.
 - 활동·강의 연혁: [양산시 인공지능 연구 동호회 공개 소개](https://port-0-ysgpt2024-m1nn7j83261da5cb.sel4.cloudtype.app/동호회_응원하기).
