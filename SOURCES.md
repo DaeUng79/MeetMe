@@ -7,6 +7,9 @@
 - [ReportAI 저장소 README](https://github.com/DaeUng79/ReportAI/blob/main/README.MD): 로컬 LLM을 활용한 보고서·보충자료·월간계획 기능과 [소개 페이지](https://daeung79.github.io/ReportAI/) 링크를 확인했습니다.
 - [MemoMindAI 저장소 README](https://github.com/DaeUng79/MemoMindAI/blob/main/README.MD): 메모 등록·검색, 관련 메모 기반 질문 응답, JSON 인수인계 기능을 확인했습니다. GitHub Pages는 활성화되어 있지 않아 저장소만 연결했습니다.
 
+## 언론 보도 추가 (2026-11-03 확인)
+- [양산신문, 「양산시, 2025 경상남도 혁신 우수사례 ‘대상’」](https://www.yangsanilbo.com/news/articleView.html?idxno=120053), 2025-10-24: 양산시 인공지능 연구동호회의 공공업무 특화 생성형 AI 서비스 10종을 다룹니다. 기사에 실린 사진은 사용자가 사용 권한을 보유한다고 확인해 사이트 자산으로 저장했습니다. 수상 주체는 양산시·동호회로 표기했습니다.
+
 ## 인증과 경력
 - 첨부 `2026-BC0663.pdf`: 오대웅, 경상남도 양산시, AI챔피언 **블루**, 2026-08-26, 인증번호 2026-BC0663. 블랙 인증번호와 일자는 확인되지 않아 기재하지 않았습니다.
 - 활동·강의 연혁: [양산시 인공지능 연구 동호회 공개 소개](https://port-0-ysgpt2024-m1nn7j83261da5cb.sel4.cloudtype.app/동호회_응원하기).
