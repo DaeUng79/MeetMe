@@ -148,7 +148,6 @@ footer{display:flex;gap:25px;align-items:center;justify-content:space-between;pa
 .coverage-copy>p:not(.coverage-meta){font-size:12px;color:#c4c6c2;line-height:1.8;margin-top:12px}
 .coverage-copy>a{display:inline-block;font-size:11px;font-weight:700;margin-top:20px;padding-bottom:3px;border-bottom:1px solid var(--gold)}
 .coverage-card>a span{color:var(--gold);margin-left:8px}
-@media (min-width:701px) and (max-width:1000px){.coverage-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){
   .wordmark{gap:7px;font-size:16px}
   .wordmark img{width:2em;height:1.7em}
