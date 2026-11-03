@@ -105,6 +105,7 @@ h2{font-size:clamp(30px,3vw,46px)}
 .contact h2{font-size:clamp(35px,4vw,58px)}
 .contact>p:not(.eyebrow){color:#bfc1bd;font-size:14px;margin-top:25px}
 .contact-links{display:flex;gap:45px;margin:30px 0;font-size:23px}
+.contact-social{display:table;margin:-8px 0 28px;padding-bottom:4px;border-bottom:1px solid var(--gold);font-size:15px;font-weight:700;color:var(--gold)}
 .contact .button{font-size:12px}
 footer{display:flex;gap:25px;align-items:center;justify-content:space-between;padding:28px 6%;font-size:10px;color:var(--muted);max-width:1600px;margin:auto}
 @media(min-width:1500px){.hero{gap:13%}}@media(max-width:1000px){.header nav{gap:18px}.wordmark span{display:none}.hero{gap:5%;padding-block:55px}.identity{padding:25px;min-height:445px}.needs{gap:5%}.projects{gap:20px}.project-visual{padding:20px;height:215px}.paper{width:94%}.section{padding-block:65px}.courses{gap:25px}.courses h3{font-size:24px}.section-caption{max-width:280px}}
