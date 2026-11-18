@@ -21,6 +21,8 @@
 - 웹페이지 교육 과정은 기존 강의명을 그대로 옮긴 것이 아니라 요청 가능한 프로그램의 제안입니다.
 
 ## 공식 기관 로고
+- [한국데이터산업진흥원](https://www.kdata.or.kr/) 공식 홈페이지 로고를 데이터 자격 항목에 표시했습니다.
+- [경상남도 상징 안내](https://www.gyeongnam.go.kr/index.gyeong?menuCd=DOM_000000137005001000)의 심벌을 제3자 보관 원본 자료에서 확인해 경상남도 기관명과 함께 표시했습니다.
 - [지방자치인재개발원 기관문양(MI)](https://www.logodi.go.kr/main/content.action?cmsid=101050104000): 공식 홈페이지에 표시된 정부 상징과 기관명 이미지 사용.
 - [행정안전부 기관문양](https://www.mois.go.kr/frt/sub/a07/miBanner/screen.do), 사용 원본: https://www.mois.go.kr/frt2022/main/img/common/logo4.png
 - [양산시 상징물](https://www.yangsan.go.kr/portal/contents.do?mid=0502010000), 사용 원본: https://www.yangsan.go.kr/common/img/common/logo.png
