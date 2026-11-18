@@ -21,6 +21,7 @@
 - 웹페이지 교육 과정은 기존 강의명을 그대로 옮긴 것이 아니라 요청 가능한 프로그램의 제안입니다.
 
 ## 공식 기관 로고
+- [지방자치인재개발원 기관문양(MI)](https://www.logodi.go.kr/main/content.action?cmsid=101050104000): 공식 홈페이지에 표시된 정부 상징과 기관명 이미지 사용.
 - [행정안전부 기관문양](https://www.mois.go.kr/frt/sub/a07/miBanner/screen.do), 사용 원본: https://www.mois.go.kr/frt2022/main/img/common/logo4.png
 - [양산시 상징물](https://www.yangsan.go.kr/portal/contents.do?mid=0502010000), 사용 원본: https://www.yangsan.go.kr/common/img/common/logo.png
 - [NIA CI](https://www.nia.or.kr/site/nia_kor/04/10401050000002016082201.jsp), 사용 원본: https://www.nia.or.kr/img/nia_kor/ci_01_01.png
