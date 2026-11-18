@@ -96,16 +96,17 @@ h2{font-size:clamp(30px,3vw,46px)}
 .timeline time{font-size:12px;color:var(--muted)}
 .timeline-tag{font-size:10px;color:#846b3c;letter-spacing:.07em}
 .timeline h3{font-size:20px;margin-top:9px}
-.certification-heading{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;margin-top:9px}
+.certification-heading{display:flex;flex-direction:column;align-items:flex-start;gap:9px;margin-top:10px}
 .certification-heading h3{margin:0}
 .certification-logos{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .certification-logos img{display:block;width:auto;max-width:100%;height:16px;object-fit:contain}
 .certification-logos img:last-child{height:15px}
+.certification-logos img:only-child:not(.logodi-logo){height:22px}
 .certification-logos img.logodi-logo{height:30px}
 .institution-line{margin-top:10px}
 .institution-line .kdata-logo{display:block;width:210px;max-width:100%;height:auto}
-.province-mark{display:inline-flex;align-items:center;gap:5px;font-size:14px;font-weight:700;color:#444}
-.province-mark img{display:block;width:24px;height:24px;object-fit:contain}
+.province-mark{display:inline-flex;align-items:center;gap:6px;font-size:17px;font-weight:700;color:#444}
+.province-mark img{display:block;width:28px;height:28px;object-fit:contain}
 .timeline p{font-size:13px;color:var(--muted);margin:10px 0 0}
 .timeline a{font-size:11px;display:inline-block;margin-top:10px}
 @media(min-width:1001px){.timeline{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:44px;max-width:none;margin-left:0}.timeline article{grid-template-columns:82px minmax(0,1fr);gap:18px}}
