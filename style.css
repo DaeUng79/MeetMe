@@ -105,6 +105,7 @@ h2{font-size:clamp(30px,3vw,46px)}
 .certification-logos img.logodi-logo{height:30px}
 .institution-line{margin-top:10px}
 .institution-line .kdata-logo{display:block;width:210px;max-width:100%;height:auto}
+.institution-line .association-logo{display:block;width:200px;max-width:100%;height:auto}
 .province-mark{display:inline-flex;align-items:center;gap:6px;font-size:17px;font-weight:700;color:#444}
 .province-mark img{display:block;width:28px;height:28px;object-fit:contain}
 .timeline p{font-size:13px;color:var(--muted);margin:10px 0 0}
